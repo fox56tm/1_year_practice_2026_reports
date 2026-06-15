@@ -122,7 +122,7 @@
 \begin{table}[h!]
     \centering
     \small
-    \caption{Время выполнения алгоритмов подсчёта треугольников, в секундах, CI = 0.95.}
+    \caption{Время выполнения алгоритмов подсчёта треугольников, в секундах, Confidence Interval = 0.95.}
     \label{tab:benchmarks}
     \begin{tabular}{llcc}
         \toprule
@@ -135,10 +135,10 @@
             & sandia-lagr   & $0.033 \pm 0.001$ & 2.64 \\
         \midrule
         \multirow{4}{*}{web-Stanford}
-            & burkhard-py   & $1.18 \pm 0.01$ & 0.52 \\
-            & sandia-py     & $0.26 \pm 0.01$ & 0.51 \\
-            & burkhard-lagr & $1.18 \pm 0.01$ & 0.87 \\
-            & sandia-lagr   & $0.26 \pm 0.01$ & 1.00 \\
+            & burkhard-py   & $1.178 \pm 0.001$ & 0.52 \\
+            & sandia-py     & $0.264 \pm 0.001$ & 0.51 \\
+            & burkhard-lagr & $1.180 \pm 0.004$ & 0.87 \\
+            & sandia-lagr   & $0.261 \pm 0.001$ & 1.00 \\
         \midrule
         \multirow{4}{*}{roadNet-CA}
             & burkhard-py   & $0.058 \pm 0.001$ & 0.57 \\
@@ -147,16 +147,16 @@
             & sandia-lagr   & $0.054 \pm 0.001$ & 1.32 \\
         \midrule
         \multirow{4}{*}{cit-Patents}
-            & burkhard-py   & $4.32 \pm 0.01$  & 0.95 \\
-            & sandia-py     & $0.68 \pm 0.01$  & 0.30 \\
-            & burkhard-lagr & $4.31 \pm 0.01$  & 0.29 \\
-            & sandia-lagr   & $0.70 \pm 0.01$  & 0.42 \\
+            & burkhard-py   & $4.322 \pm 0.012$ & 0.95 \\
+            & sandia-py     & $0.679 \pm 0.001$ & 0.30 \\
+            & burkhard-lagr & $4.309 \pm 0.005$ & 0.29 \\
+            & sandia-lagr   & $0.698 \pm 0.001$ & 0.42 \\
         \midrule
         \multirow{4}{*}{amazon-2008}
-            & burkhard-py   & $0.29 \pm 0.01$ & 0.44 \\
-            & sandia-py     & $0.10 \pm 0.01$ & 0.29 \\
-            & burkhard-lagr & $0.30 \pm 0.01$ & 0.29 \\
-            & sandia-lagr   & $0.11 \pm 0.01$ & 0.86 \\
+            & burkhard-py   & $0.294 \pm 0.001$ & 0.44 \\
+            & sandia-py     & $0.103 \pm 0.001$ & 0.29 \\
+            & burkhard-lagr & $0.302 \pm 0.001$ & 0.29 \\
+            & sandia-lagr   & $0.111 \pm 0.001$ & 0.86 \\
         \midrule
         \multirow{4}{*}{amazon0302}
             & burkhard-py   & $0.087 \pm 0.001$ & 0.38 \\
@@ -179,7 +179,7 @@
 
 Для выяснения причины превосходства \texttt{python-graphblas} на графах roadNet-CA, amazon-2008 и web-NotreDame было проведено профилирование с помощью \texttt{perf} (алгоритм Sandia, частота дискретизации 99~Гц). Вклад внутренних функций GraphBLAS рас\-счи\-ты\-вал\-ся как отношение числа зарегистрированных отсчетов конкретной функции к общему числу отсчетов в точке входа в измеряемый цикл вычислений алгоритма.
 
-Профилирование показало следующее:
+Профилирование показало следующее.
 \begin{itemize}
     \item На графе roadNet-CA разница наиболее выражена: функция \texttt{GB\_AxB\_saxpy3\_flopcount} занимает $\approx 19{,}08\%$ времени у LAGraph против $\approx 10{,}41\%$ у \texttt{python-graphblas}; \texttt{GB\_select\_positional\_phase1}~--- $\approx 14{,}96\%$ против $\approx 7{,}07\%$; \texttt{GB\_msort\_3}~--- $\approx 6{,}59\%$ против $\approx 3{,}29\%$.
     \item На графе amazon-2008 разница между реализациями минимальна (в пределах 1\% на каждую функцию), однако функции, вызываемые этими операциями, также занимают чуть больше времени у LAGraph, что в сумме даёт суммарную разницу.
